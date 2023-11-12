@@ -1,0 +1,32 @@
+<mat-card> <img src="assets/Logo.png" /></mat-card>
+<mat-card *ngIf="hideEditForm">
+  <mat-card-content *ngIf="customers.length > 0; else loading">
+    <mat-card-header class="app-accent" layout="row">
+      <mat-card-title>
+        {{ msg }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-list flex>
+      <app-customer-list [customers]="customers" (selected)="select($event)">
+      </app-customer-list>
+    </mat-list>
+  </mat-card-content>
+  <ng-template #loading class="my-primary-text">Loading Customers from server...</ng-template>
+</mat-card>
+<div class="pad5" *ngIf="hideEditForm">
+  <mat-icon (click)="newCustomer()" matTooltip="Add New Customer" class="addicon" color="primary">
+    control_point
+  </mat-icon>
+</div>
+<mat-card *ngIf="!hideEditForm">
+  <mat-card-header>
+    <mat-card-title>
+      <span class="my-primary-text">{{ msg }}</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-customer-detail [selectedCustomer]="customer" (cancelled)="cancel('cancelled')" (saved)="save($event)"
+      (deleted)="delete($event)">
+    </app-customer-detail>
+  </mat-card-content>
+</mat-card>

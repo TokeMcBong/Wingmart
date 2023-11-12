@@ -1,0 +1,115 @@
+<form [formGroup]="hubForm">
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>Hub Name</mat-label><mat-error *ngIf="name.errors && (name.dirty || name.touched)"
+        style="text-align: end">
+        Name is required
+      </mat-error>
+      <input matInput type="text" required autofocus formControlName="name" />
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <mat-error *ngIf="email.errors && (email.dirty || email.touched)" align="end">
+        <span *ngIf="email.hasError('required')">Email is required.</span>
+        <span *ngIf="!email.hasError('required') && email.hasError('invalidEmail')">needs format -
+          ###&#64;##.###</span>
+      </mat-error>
+      <input matInput type="email" required formControlName="email" />
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>Phone #</mat-label>
+      <mat-error *ngIf="phone.errors && (phone.dirty || phone.touched)" align="end">
+        <span *ngIf="phone.hasError('required')">Phone# is required.</span>
+        <span *ngIf="!phone.hasError('required') && phone.hasError('invalidPhone')">needs format - (###)###-####</span>
+      </mat-error>
+      <input matInput type="text" required formControlName="phone" />
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <mat-error *ngIf="address.errors && (address.dirty || address.touched)" style="text-align: end">
+        Address is required
+      </mat-error>
+      <input matInput type="text" required formControlName="address" />
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>City</mat-label><mat-error *ngIf="city.errors && (city.dirty || city.touched)" style="text-align: end">
+        City is required
+      </mat-error>
+      <input matInput type="text" required formControlName="city" />
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>Province</mat-label>
+      <mat-error *ngIf="name.errors && (name.dirty || name.touched)" style="text-align: end">
+        Province is required
+      </mat-error>
+      <mat-select matInput required placeholder="Province" formControlName="province" flex>
+        <mat-option value="On">Ontario</mat-option>
+        <mat-option value="Qu">Quebec</mat-option>
+        <mat-option value="Ab">Alberta</mat-option>
+        <mat-option value="Nf">New Foundland</mat-option>
+        <mat-option value="Nb">New Brunswick</mat-option>
+        <mat-option value="Ns">Nova Scoita</mat-option>
+        <mat-option value="Pei">Prince Edward Island</mat-option>
+        <mat-option value="Mn">Manitoba</mat-option>
+        <mat-option value="Sk">Saskatchewan</mat-option>
+        <mat-option value="Bc">British Columbia</mat-option>
+        <mat-option value="Yk">Yukon</mat-option>
+        <mat-option value="Nwt">North West Territories</mat-option>
+        <mat-option value="Nv">Nunavut</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>Postal Code</mat-label>
+      <mat-error *ngIf="postalcode.errors && (postalcode.dirty || postalcode.touched)" align="end">
+        <span *ngIf="postalcode.hasError('required')">Postal code is required.</span>
+        <span *ngIf="
+            !postalcode.hasError('required') &&
+            postalcode.hasError('invalidPostalcode')
+          ">needs format - A1B-2C3</span>
+      </mat-error>
+
+      <input matInput type="text" required formControlName="postalcode" />
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <mat-label>Hub Rating</mat-label><mat-error *ngIf="type.errors && (type.dirty || type.touched)"
+        style="text-align: end">
+        Hub rating is required
+      </mat-error>
+      <mat-select matInput required placeholder="Hub Rating Type" formControlName="type" flex>
+        <mat-option value="Trusted">Trusted</mat-option>
+        <mat-option value="Untrusted">Untrusted</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="mat-pad-sm">
+    <span>
+      <button mat-raised-button type="button" (click)="updateSelectedHub()" [disabled]="!hubForm.valid">
+        Save
+      </button>
+    </span>
+    <span>
+      <button *ngIf="selectedHub.id" mat-raised-button type="button" (click)="deleted.emit(selectedHub)">
+        Delete
+      </button>
+    </span>
+    <span>
+      <button mat-raised-button type="button" (click)="cancelled.emit(selectedHub)">
+        Cancel
+      </button>
+    </span>
+  </div>
+</form>

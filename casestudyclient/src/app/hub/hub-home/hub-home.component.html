@@ -1,0 +1,32 @@
+<mat-card> <img src="assets/Logo.png" /></mat-card>
+<mat-card *ngIf="hideEditForm">
+  <mat-card-content *ngIf="hubs.length > 0; else loading">
+    <mat-card-header class="app-accent" layout="row">
+      <mat-card-title>
+        {{ msg }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-list flex>
+      <app-hub-list [hubs]="hubs" (selected)="select($event)">
+      </app-hub-list>
+    </mat-list>
+  </mat-card-content>
+  <ng-template #loading class="my-primary-text">Loading Hubs from server...</ng-template>
+</mat-card>
+<div class="pad5" *ngIf="hideEditForm">
+  <mat-icon (click)="newHub()" matTooltip="Add New Hub" class="addicon" color="primary">
+    control_point
+  </mat-icon>
+</div>
+<mat-card *ngIf="!hideEditForm">
+  <mat-card-header>
+    <mat-card-title>
+      <span class="my-primary-text">{{ msg }}</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-hub-detail [selectedHub]="hub" (cancelled)="cancel('cancelled')" (saved)="save($event)"
+      (deleted)="delete($event)">
+    </app-hub-detail>
+  </mat-card-content>
+</mat-card>

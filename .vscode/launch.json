@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-CasestudyserverApplication<casestudyserver>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.info5059.casestudyserver.CasestudyserverApplication",
+      "projectName": "casestudyserver",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
